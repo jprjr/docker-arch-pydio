@@ -42,5 +42,5 @@ persistence.
 
 ## Exposed volumes
 
-* `/srv/http/pydio` (explicit from the Dockerfile, you'll need your proxy to access this)
+* `/srv/http/pydio` (explicitly from the Dockerfile. You'll want your proxy to access this volume using --volumes-from or similar)
 * `/var/lib/pydio/data` (implied by using the -v option, not in the Dockerfile)
