@@ -4,6 +4,8 @@ This is an Arch Linux-based image with [Pydio](http://pyd.io) installed.
 
 It's running as a FastCGI app, listening on port 9000.
 
+I wrote up a [blog post](https://jrjrtech.com/blog/2014/03/27/docker_fastcgi_pydio/) on using this with an nginx prox
+
 ## Usage
 
 Pydio expects the data folder to have a certain layout. I've made a small
