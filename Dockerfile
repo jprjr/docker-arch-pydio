@@ -44,3 +44,4 @@ ADD init_data_folder.sh /opt/init_data_folder.sh
 
 # Volume to export
 VOLUME /srv/http/pydio
+VOLUME /var/lib/pydio/data
