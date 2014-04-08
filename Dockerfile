@@ -41,7 +41,12 @@ RUN cd /srv/http && \
     chown -R http:http /usr/share/pydio 
     
 ADD init_data_folder.sh /opt/init_data_folder.sh
+RUN /opt/init_data_folder.sh
 
 # Volume to export
 VOLUME /srv/http/pydio
 VOLUME /var/lib/pydio/data
+
+# Port 9000 is implied by parent
+# WebSockets port
+EXPOSE 8090
