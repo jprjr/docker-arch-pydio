@@ -4,7 +4,7 @@ This is an Arch Linux-based image with [Pydio](http://pyd.io) installed.
 
 It's running as a FastCGI app, listening on port 9000.
 
-I wrote up a [blog post](https://jrjrtech.com/blog/2014/03/27/docker_fastcgi_pydio/) on using this with an nginx prox
+I wrote up a [blog post](https://jrjrtech.com/blog/2014/03/27/docker_fastcgi_pydio/) on using this with an nginx proxy
 
 ## Usage
 
@@ -38,9 +38,10 @@ persistence.
 
 ## Exposed ports
 
-* 9000
+* 9000 (fastcgi port)
+* 8090 (default websocket port)
 
 ## Exposed volumes
 
-* `/srv/http/pydio` (explicitly from the Dockerfile. You'll want your proxy to access this volume using --volumes-from or similar)
-* `/var/lib/pydio/data` (implied by using the -v option, not in the Dockerfile)
+* `/usr/share/webapps/pydio` (explicitly from the Dockerfile. You'll want your proxy to access this volume using --volumes-from or similar)
+* `/var/lib/pydio/data` 
