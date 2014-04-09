@@ -25,28 +25,27 @@ RUN sed -i '/^output_buffering/c \
 output_buffering = Off' /etc/php/php.ini
 
 RUN sed -i '/^open_basedir/c \
-open_basedir = /srv/http/:/tmp/:/usr/share/pear/:/var/lib/pydio/' /etc/php/php.ini
+open_basedir = /usr/share/webapps/pydio/:/tmp/:/usr/share/pear/:/var/lib/pydio/' /etc/php/php.ini
 
-RUN cd /srv/http && \
+RUN mkdir -p /usr/share/webapps && \
     mkdir -p /var/lib/pydio &&  \
-    mkdir -p /usr/share/pydio && \
+    cd /usr/share/webapps && \
     curl -R -L \
     "http://downloads.sourceforge.net/project/ajaxplorer/pydio/stable-channel/5.2.3/pydio-core-5.2.3.tar.gz" \
     | tar xz && \
-    mv pydio-core-5.2.3/data /usr/share/pydio/data-5.2.3  && \
-    ln -s /srv/http/pydio-core-5.2.3 /srv/http/pydio && \
-    ln -s /var/lib/pydio/data /srv/http/pydio/data && \
-    chown -R http:http /srv/http && \
+    mv pydio-core-5.2.3/data /usr/share/webapps/pydio-data-5.2.3  && \
+    ln -s /usr/share/webapps/pydio-core-5.2.3 /usr/share/webapps/pydio && \
+    ln -s /var/lib/pydio/data /usr/share/webapps/pydio/data && \
     chown -R http:http /var/lib/pydio && \
-    chown -R http:http /usr/share/pydio 
+    chown -R http:http /usr/share/webapps
     
 ADD init_data_folder.sh /opt/init_data_folder.sh
 RUN /opt/init_data_folder.sh
 
-# Volume to export
-VOLUME /srv/http/pydio
+# Volumes to export
+VOLUME /usr/share/webapps/pydio
 VOLUME /var/lib/pydio/data
 
-# Port 9000 is implied by parent
+# Port 9000 (fastcgi) is implied by parent
 # WebSockets port
 EXPOSE 8090
